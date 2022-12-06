@@ -4,14 +4,15 @@
 #define PAS_CAN 5.0F/1024.0F
 void setup() {
   // put your setup code here, to run once:
-
+  Serial.begin(9600);
   pinMode(GREEN_PIN, OUTPUT);
   pinMode(YELLOW_PIN, OUTPUT);
   pinMode(RED_PIN, OUTPUT);
 }
 
 void loop() {
-  uint8_t canValue=analogRead(A0);
+  uint16_t canValue=analogRead(A0);
+  Serial.println(canValue);
   // put your main code here, to run repeatedly:
   digitalWrite(RED_PIN, HIGH);
   delay(500);
