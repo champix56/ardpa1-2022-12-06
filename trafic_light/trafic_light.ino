@@ -12,7 +12,13 @@ void setup() {
 
 void loop() {
   uint16_t canValue=analogRead(A0);
-  Serial.println(canValue);
+  float tensionEnAo=canValue*PAS_CAN;
+  
+  Serial.print(canValue);
+  Serial.print("\ttension en A0 : ");
+  Serial.print(tensionEnAo);
+  Serial.println("Volts");
+  
   // put your main code here, to run repeatedly:
   digitalWrite(RED_PIN, HIGH);
   delay(500);
