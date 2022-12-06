@@ -1,23 +1,27 @@
+#define GREEN_PIN 6
+#define YELLOW_PIN 5
+#define RED_PIN 4
+
 void setup() {
   // put your setup code here, to run once:
 
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
-  pinMode(6, OUTPUT);
+  pinMode(GREEN_PIN, OUTPUT);
+  pinMode(YELLOW_PIN, OUTPUT);
+  pinMode(RED_PIN, OUTPUT);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  digitalWrite(4, HIGH);
+  digitalWrite(RED_PIN, HIGH);
   delay(500);
-  digitalWrite(5, HIGH);
+  digitalWrite(YELLOW_PIN, HIGH);
   delay(500);
-  digitalWrite(6, HIGH);
+  digitalWrite(GREEN_PIN, HIGH);
   delay(500);
-  digitalWrite(4, LOW);
+  digitalWrite(RED_PIN, LOW);
   delay(500);
-  digitalWrite(5, LOW);
+  digitalWrite(YELLOW_PIN, LOW);
   delay(500);
-  digitalWrite(6, LOW);
+  digitalWrite(GREEN_PIN, LOW);
   delay(500);
 }
