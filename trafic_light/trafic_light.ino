@@ -1,7 +1,7 @@
 #define GREEN_PIN 6
 #define YELLOW_PIN 5
 #define RED_PIN 4
-
+#define PAS_CAN 5.0F/1024.0F
 void setup() {
   // put your setup code here, to run once:
 
@@ -11,6 +11,7 @@ void setup() {
 }
 
 void loop() {
+  uint8_t canValue=analogRead(A0);
   // put your main code here, to run repeatedly:
   digitalWrite(RED_PIN, HIGH);
   delay(500);
