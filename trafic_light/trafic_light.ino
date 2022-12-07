@@ -1,7 +1,7 @@
 #define GREEN_PIN 6
 #define YELLOW_PIN 5
 #define RED_PIN 4
-#define BUTTON_PIN 7
+#define BUTTON_PIN 2
 #define PAS_CAN 5.0F / 1024.0F
 void setup() {
   // put your setup code here, to run once:
