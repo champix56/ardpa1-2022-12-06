@@ -1,6 +1,7 @@
 #define GREEN_PIN 6
 #define YELLOW_PIN 5
 #define RED_PIN 4
+#define BUTTON_PIN 7
 #define PAS_CAN 5.0F / 1024.0F
 void setup() {
   // put your setup code here, to run once:
@@ -12,7 +13,7 @@ void setup() {
 }
 
 void loop() {
-  bool isPushed = digitalRead(7);
+  bool isPushed = digitalRead(BUTTON_PIN);
   if (isPushed) {
     uint16_t canValue = analogRead(A0);
     float tensionEnAo = canValue * PAS_CAN;
