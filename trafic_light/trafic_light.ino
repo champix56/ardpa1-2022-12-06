@@ -28,6 +28,9 @@ void loop() {
   }
   delay(5000);
 }
+/**
+* sequence feux pietons
+*/
 void sequencePietons(uint16_t tempsDelay) {
   delay(800);
   digitalWrite(YELLOW_PIN, HIGH);
