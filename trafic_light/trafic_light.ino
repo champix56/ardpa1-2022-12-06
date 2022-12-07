@@ -3,18 +3,23 @@
 #define RED_PIN 4
 #define BUTTON_PIN 2
 #define PAS_CAN 5.0F / 1024.0F
+void interruptFunction();
+volatile bool pietonPushedButton = false;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   pinMode(GREEN_PIN, OUTPUT);
   pinMode(YELLOW_PIN, OUTPUT);
   pinMode(RED_PIN, OUTPUT);
-  digitalWrite(RED_PIN, TRUE);
+
+  digitalWrite(RED_PIN, HIGH);
+  attachInterrupt(digitalPinToInterrupt(2), interruptFunction, RISING);
 }
 
 void loop() {
-  bool isPushed = digitalRead(BUTTON_PIN);
-  if (isPushed) {
+  Serial.println("entree boucle");
+  if (pietonPushedButton) {
+    Serial.println("entree section loop/pieton");
     uint16_t canValue = analogRead(A0);
     float tensionEnAo = canValue * PAS_CAN;
 
@@ -25,8 +30,20 @@ void loop() {
     uint16_t tempsDelay = (3000.0F / 1024.0F) * canValue;
     // put your main code here, to run repeatedly:
     sequencePietons(tempsDelay);
+    pietonPushedButton = false;
+    //interrupts();
+    attachInterrupt(digitalPinToInterrupt(2), interruptFunction, RISING);
   }
   delay(5000);
+}
+/**
+* fonction de gestion d'interruption
+*/
+void interruptFunction() {
+  //noInterrupts();
+  detachInterrupt(digitalPinToInterrupt(2));
+  Serial.println("iterruption declenchée");
+  pietonPushedButton = true;
 }
 /**
 * sequence feux pietons
