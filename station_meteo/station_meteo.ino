@@ -2,7 +2,7 @@
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);
+  Serial.begin(9600);
   screenSetup();
   humiditySetup();
   screenShowStartupScreen();
@@ -11,5 +11,11 @@ void setup() {
 }
 
 void loop() {
-  humidityLoop();
+  float r,t;
+  humidityLoop(&r,&t,false);
+  Serial.print(F("humidity:"));
+  Serial.print(r);
+  Serial.print(F(",temp:"));
+  Serial.println(t);
+
 }
