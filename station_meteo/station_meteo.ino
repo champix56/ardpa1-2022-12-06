@@ -13,11 +13,22 @@ void setup() {
 
 void loop() {
   S_Datas datas;
-  humidityLoop(&datas.humidity.rhumidity,&datas.humidity.temp,false);
+  humidityLoop(&datas.humidity.rhumidity, &datas.humidity.temp, false);
   timeLoop(&datas.time);
-  Serial.print(F("humidity:"));
-  Serial.print(datas.humidity.rhumidity);
-  Serial.print(F(",temp:"));
-  Serial.println(datas.humidity.temp);
-
+  char str[33] = "";
+  formatDatasStr(datas, str);
+  Serial.print(str);
+}
+uint8_t formatDatasStr(S_Datas datas, char buffer[]) {
+  //yyyy-mm-ddThh:mm:ss;rr.rr;tt.tt\n
+  //ecriture du temps au format YYYY-MM-DDTHH:mm:ss;
+  uint8_t length = sprintf(buffer, "%4d-%02d-%02dT%02d:%02d:%02d;",
+                           (datas.time.Year + 1970),
+                           datas.time.Month,
+                           datas.time.Day,
+                           datas.time.Hour,
+                           datas.time.Minute,
+                           datas.time.Second);
+  
+  return length;
 }
