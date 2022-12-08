@@ -46,8 +46,8 @@ void screenShowMainScreen() {
   tft.fillScreen(BACKGROUND_COLOR);
   tft.fillRect(0, 0, tft.width(), 8, ST77XX_DARKPINK);
   tft.fillRect(SCREEN_POSITION_TIME_X, SCREEN_POSITION_TIME_Y, SCREEN_POSITION_TIME_W, SCREEN_POSITION_TIME_H, SCREEN_BACKCOLOR_TIME);
-  placeHalfWidthCadre(0, 20, "RH%", "%");
-  placeHalfWidthCadre(tft.width() / 2 - 1, 20, "TEMP", "c");
+  placeHalfWidthCadre(SCREEN_POSITION_HUMIDITY_X,SCREEN_POSITION_HUMIDITY_Y, "RH%", "%");
+  placeHalfWidthCadre(SCREEN_POSITION_TEMP_X,SCREEN_POSITION_TEMP_Y, "TEMP", "c");
 }
 void placeHalfWidthCadre(uint8_t x, uint8_t y, char* titre, char* unite) {
   uint8_t width = tft.width() / 2 - 4;
@@ -57,15 +57,15 @@ void placeHalfWidthCadre(uint8_t x, uint8_t y, char* titre, char* unite) {
   tft.setTextSize(1);
   tft.setCursor(x + 10, y + 5);
   tft.print(titre);
-  tft.setTextSize(2);
-  tft.setCursor(x + width - 20, y + height - 20);
+  tft.setTextSize(1);
+  tft.setCursor(x + width - 10, y + height - 10);
   tft.print(unite);
 }
 void refreshValueInHalfWidthCadre(uint8_t x, uint8_t y, char* value, uint8_t width) {
-  tft.fillRect(x + 5, y + 45 - 20, width, 10, BACKGROUND_COLOR);
+  tft.fillRect(x + 5, y + 45 - 30, width, 20, BACKGROUND_COLOR);
   tft.setTextSize(2);
   tft.setTextColor(FOREGROUND_COLOR);
-  tft.setCursor(5, y + 45 - 20);
+  tft.setCursor(x+5, y + 45 - 30);
   tft.print(value);
 }
 void refreshTime(tmElements_t tm) {
@@ -78,6 +78,14 @@ void refreshTime(tmElements_t tm) {
   tft.fillRect(SCREEN_POSITION_TIME_X, SCREEN_POSITION_TIME_Y, SCREEN_POSITION_TIME_W, SCREEN_POSITION_TIME_H, SCREEN_BACKCOLOR_TIME);
 
   tft.print(buff);
+}
+void refreshHumidity(float rh){
+  char tmp[6]="";
+  refreshValueInHalfWidthCadre(SCREEN_POSITION_HUMIDITY_X,SCREEN_POSITION_HUMIDITY_Y,dtostrf(rh,2,1,tmp),50);
+}
+void refreshTemperature(float temp){
+  char tmp[6]="";
+  refreshValueInHalfWidthCadre(SCREEN_POSITION_TEMP_X,SCREEN_POSITION_TEMP_Y,dtostrf(temp,2,1,tmp),50);
 }
 // void screenLoop(S_Datas datas) {
 //   refreshTime(datas.time);
