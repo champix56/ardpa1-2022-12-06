@@ -5,6 +5,7 @@ void setup() {
   Serial.begin(9600);
   screenSetup();
   humiditySetup();
+  timeSetup();
   screenShowStartupScreen();
   Serial.println(F("METEO STATION\nstarted"));
   delay(2000);
@@ -13,6 +14,7 @@ void setup() {
 void loop() {
   S_Datas datas;
   humidityLoop(&datas.humidity.rhumidity,&datas.humidity.temp,false);
+  timeLoop(&datas.time);
   Serial.print(F("humidity:"));
   Serial.print(datas.humidity.rhumidity);
   Serial.print(F(",temp:"));
