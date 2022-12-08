@@ -1,0 +1,16 @@
+#ifndef _ST7735_POSITION_H
+#define _ST7735_POSITION_H
+  //screen dimensions
+  #define SCREEN_W_PIXEL 128
+  #define SCREEN_H_PIXEL 160
+  //positions
+  #define SCREEN_POSITION_TIME_W 40
+  #define SCREEN_POSITION_TIME_H 12
+  #define SCREEN_POSITION_TIME_X (uint8_t)SCREEN_W_PIXEL/2.0 - (SCREEN_POSITION_TIME_W/2.0)
+  #define SCREEN_POSITION_TIME_Y 0
+  #define SCREEN_BACKCOLOR_TIME 0x0C2F
+
+
+
+
+#endif
