@@ -1,4 +1,4 @@
-
+#include "structs.h"
 
 void setup() {
   // put your setup code here, to run once:
@@ -11,11 +11,11 @@ void setup() {
 }
 
 void loop() {
-  float r,t;
-  humidityLoop(&r,&t,false);
+  S_Datas datas;
+  humidityLoop(&datas.humidity.rhumidity,&datas.humidity.temp,false);
   Serial.print(F("humidity:"));
-  Serial.print(r);
+  Serial.print(datas.humidity.rhumidity);
   Serial.print(F(",temp:"));
-  Serial.println(t);
+  Serial.println(datas.humidity.temp);
 
 }
