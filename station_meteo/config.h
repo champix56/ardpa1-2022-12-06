@@ -8,6 +8,6 @@
   #define ST7735
   #define SD_CSV
   //communication
-  #define SERIAL_TRANSPORT
-
+  #define SERIAL_TRANSPORT_RECIEVER
+  #define SERIAL_TRANSPORT_TRANSMITER
 #endif
