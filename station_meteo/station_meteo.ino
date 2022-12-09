@@ -4,6 +4,8 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   screenSetup();
+  pressureSetup();
+  sdSetup();
   humiditySetup();
   timeSetup();
   screenShowStartupScreen();
@@ -20,9 +22,15 @@ void loop() {
   refreshTemperature(datas.humidity.temp);
   timeLoop(&datas.time);
   refreshTime(datas.time);
+  pressureRead(&datas.pressure);
   char str[33] = "";
   formatDatasStr(datas, str);
   Serial.print(str);
+  char date[11]="";
+  sprintf(date,"%4d-%02d-%02d", (datas.time.Year + 1970),
+          datas.time.Month,
+          datas.time.Day);
+  sdWriteDatas(date,str);
   delay(930);
 }
 uint8_t formatDatasStr(S_Datas datas, char buffer[]) {
