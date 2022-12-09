@@ -1,6 +1,9 @@
-/*librairies inclues*/
-#include "DHT.h"
+#include "config.h"
 
+
+#ifdef S_DHT11
+/*librairies inclues*/
+#include <DHT.h>
 #define DHTPIN 2
 #define DHTTYPE DHT11
 
@@ -11,16 +14,17 @@ void humiditySetup() {
   /*initialisation du composant DHT11*/
   dht.begin();
 }
-void humidityLoop(float *rhumidity, float *temp, bool isFahrenheit ) {
+void humidityLoop(float *rhumidity, float *temp, bool isFahrenheit) {
   // put your main code here, to run repeatedly:
-   *rhumidity = dht.readHumidity();
+  *rhumidity = dht.readHumidity();
   // Read temperature as Celsius (the default)
-   *temp = dht.readTemperature(isFahrenheit);
+  *temp = dht.readTemperature(isFahrenheit);
   // Read temperature as Fahrenheit (isFahrenheit = true)
   //pas utilisé ->float f = dht.readTemperature(true);
   // Check if any reads failed and exit early (to try again).
-  if (isnan(*rhumidity) || isnan(*temp) ) {//pas utilisé ->|| isnan(f)
+  if (isnan(*rhumidity) || isnan(*temp)) {  //pas utilisé ->|| isnan(f)
     Serial.println(F("Failed to read from DHT sensor!"));
     return;
   }
 }
+#endif

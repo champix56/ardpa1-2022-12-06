@@ -1,3 +1,5 @@
+#include "config.h"
+#ifdef SD_CSV
 #include <SPI.h>
 #include <SD.h>
 
@@ -15,3 +17,4 @@ uint8_t sdWriteDatas(char* date, char* values) {
   csvFile.print(values);
   return strlen(values);
 }
+#endif

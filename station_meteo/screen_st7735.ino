@@ -1,3 +1,5 @@
+#include "config.h"
+#ifdef ST7735
 #include "structs.h"
 #include "screen_ST7735_positions.h"
 #include <Adafruit_GFX.h>     // Core graphics library
@@ -19,8 +21,8 @@
 
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 /**
-* fonction setup de l'ecran ST7735
-*/
+  * fonction setup de l'ecran ST7735
+  */
 void screenSetup() {
   /*initialisation de l'ecran*/
   tft.initR(INITR_BLACKTAB);  // Init ST7735S chip, black tab
@@ -46,8 +48,8 @@ void screenShowMainScreen() {
   tft.fillScreen(BACKGROUND_COLOR);
   tft.fillRect(0, 0, tft.width(), 8, ST77XX_DARKPINK);
   tft.fillRect(SCREEN_POSITION_TIME_X, SCREEN_POSITION_TIME_Y, SCREEN_POSITION_TIME_W, SCREEN_POSITION_TIME_H, SCREEN_BACKCOLOR_TIME);
-  placeHalfWidthCadre(SCREEN_POSITION_HUMIDITY_X,SCREEN_POSITION_HUMIDITY_Y, "RH%", "%");
-  placeHalfWidthCadre(SCREEN_POSITION_TEMP_X,SCREEN_POSITION_TEMP_Y, "TEMP", "c");
+  placeHalfWidthCadre(SCREEN_POSITION_HUMIDITY_X, SCREEN_POSITION_HUMIDITY_Y, "RH%", "%");
+  placeHalfWidthCadre(SCREEN_POSITION_TEMP_X, SCREEN_POSITION_TEMP_Y, "TEMP", "c");
 }
 void placeHalfWidthCadre(uint8_t x, uint8_t y, char* titre, char* unite) {
   uint8_t width = tft.width() / 2 - 4;
@@ -65,7 +67,7 @@ void refreshValueInHalfWidthCadre(uint8_t x, uint8_t y, char* value, uint8_t wid
   tft.fillRect(x + 5, y + 45 - 30, width, 20, BACKGROUND_COLOR);
   tft.setTextSize(2);
   tft.setTextColor(FOREGROUND_COLOR);
-  tft.setCursor(x+5, y + 45 - 30);
+  tft.setCursor(x + 5, y + 45 - 30);
   tft.print(value);
 }
 void refreshTime(tmElements_t tm) {
@@ -79,19 +81,21 @@ void refreshTime(tmElements_t tm) {
 
   tft.print(buff);
 }
-void refreshHumidity(float rh){
-  char tmp[6]="";
-  refreshValueInHalfWidthCadre(SCREEN_POSITION_HUMIDITY_X,SCREEN_POSITION_HUMIDITY_Y,dtostrf(rh,2,1,tmp),50);
+void refreshHumidity(float rh) {
+  char tmp[6] = "";
+  refreshValueInHalfWidthCadre(SCREEN_POSITION_HUMIDITY_X, SCREEN_POSITION_HUMIDITY_Y, dtostrf(rh, 2, 1, tmp), 50);
 }
-void refreshTemperature(float temp){
-  char tmp[6]="";
-  refreshValueInHalfWidthCadre(SCREEN_POSITION_TEMP_X,SCREEN_POSITION_TEMP_Y,dtostrf(temp,2,1,tmp),50);
+void refreshTemperature(float temp) {
+  char tmp[6] = "";
+  refreshValueInHalfWidthCadre(SCREEN_POSITION_TEMP_X, SCREEN_POSITION_TEMP_Y, dtostrf(temp, 2, 1, tmp), 50);
 }
-// void screenLoop(S_Datas datas) {
-//   refreshTime(datas.time);
-//   char buff[6] = "";
-//   dtostrf(datas.humidity.rhumidity, 2, 2, buff);
-//   refreshValueInHalfWidthCadre(0, 20, buff, 20);
-//   dtostrf(datas.humidity.temp, 2, 2, buff);
-//   refreshValueInHalfWidthCadre(tft.width() / 2 - 1, 20, buff, 20);
-//}
+
+#endif
+/* void screenLoop(S_Datas datas) {
+  refreshTime(datas.time);
+  char buff[6] = "";
+  dtostrf(datas.humidity.rhumidity, 2, 2, buff);
+  refreshValueInHalfWidthCadre(0, 20, buff, 20);
+  dtostrf(datas.humidity.temp, 2, 2, buff);
+  refreshValueInHalfWidthCadre(tft.width() / 2 - 1, 20, buff, 20);
+}*/
