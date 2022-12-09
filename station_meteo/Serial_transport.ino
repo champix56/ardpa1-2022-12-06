@@ -25,7 +25,7 @@
       #endif
       #ifdef SERIAL_TRANSPORT_RECIEVER
       //code recept.
-        Serial.flush();
+        //Serial.flush();
         while(!mySerial.available()){;}
         delay(50);
         int i=0;
@@ -33,7 +33,11 @@
           udatas.bytesTab[i]= mySerial.read();
           i++;
         }
+
         *datas=udatas.datas;
+        char x[50]="";
+         formatDatasStr( *datas, x);
+         Serial.println(x);
       #endif
   }
 #endif

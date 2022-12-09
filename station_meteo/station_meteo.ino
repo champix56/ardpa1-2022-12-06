@@ -27,6 +27,9 @@ void setup() {
   delay(2000);
   screenShowMainScreen();
   #endif
+  #ifdef SERIAL_TRANSPORT
+    serialTransportSetup();
+  #endif
 }
 
 void loop() {
@@ -48,10 +51,12 @@ void loop() {
   #ifdef BMP180
     pressureRead(&datas.pressure);
   #endif
-  char str[33] = "";
+  char str[43] = "";
   formatDatasStr(datas, str);
   Serial.print(str);
-
+  #ifdef SERIAL_TRANSPORT
+    serialTransportLoop();
+  #endif
   #ifdef SD_CSV  
   char date[11]="";
   sprintf(date,"%4d-%02d-%02d", (datas.time.Year + 1970),
